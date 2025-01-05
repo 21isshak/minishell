@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:05 by iskaraag          #+#    #+#             */
-/*   Updated: 2024/12/17 16:45:35 by iskaraag         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:49:09 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,9 @@ void	handle_export(char *args[])
 			write(2, "export: invalid format\n", 23);
 		i++;
 	}
+}
+
+void	handle_clear(void)
+{
+	printf("\033[H\033[J");
 }

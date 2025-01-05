@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:39:24 by iskaraag          #+#    #+#             */
-/*   Updated: 2024/12/17 17:38:49 by iskaraag         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:52:03 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void		handle_cd(char *args[]);
 void		handle_env(void);
 void		handle_unset(char *args[]);
 void		handle_export(char *args[]);
+void		handle_clear(void);
 
 // builtin_execution.c
 int			execute_builtin(char *args[]);
