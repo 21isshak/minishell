@@ -1,4 +1,4 @@
 On last commit:
 
 1) Corrections on some builtins
-2) Handling direcions..
+2) Handling directions..
