@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:07 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/02 16:42:53 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:57:45 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,40 +126,35 @@ void	execute_piped_commands(char **args)
 
 void	execution(t_data *data, char *args[])
 {
-	int		input_redirect;
-	int		output_redirect;
-	int		append_mode;
-	char	*input_file;
-	char	*output_file;
-	int		fd;
-	int		i;
+	t_drct_data	d_data;
+	int			i;
 
-	input_redirect = 0;
-	output_redirect = 0;
-	append_mode = 0;
-	input_file = NULL;
-	output_file = NULL;
+	d_data.input_redirect = 0;
+	d_data.output_redirect = 0;
+	d_data.append_mode = 0;
+	d_data.input_file = NULL;
+	d_data.output_file = NULL;
 	i = 0;
 	while (args[i])
 	{
-		if (strcmp(args[i], "<") == 0)
+		if (ft_strncmp(args[i], "<\0", 2) == 0)
 		{
-			input_redirect = 1;
-			input_file = args[i + 1];
+			d_data.input_redirect = 1;
+			d_data.input_file = args[i + 1];
 			args[i] = NULL;
 		}
-		else if (strcmp(args[i], ">") == 0)
+		else if (ft_strncmp(args[i], ">\0", 2) == 0)
 		{
-			output_redirect = 1;
-			append_mode = 0;
-			output_file = args[i + 1];
+			d_data.output_redirect = 1;
+			d_data.append_mode = 0;
+			d_data.output_file = args[i + 1];
 			args[i] = NULL;
 		}
-		else if (strcmp(args[i], ">>") == 0)
+		else if (ft_strncmp(args[i], ">>\0", 3) == 0)
 		{
-			output_redirect = 1;
-			append_mode = 1;
-			output_file = args[i + 1];
+			d_data.output_redirect = 1;
+			d_data.append_mode = 1;
+			d_data.output_file = args[i + 1];
 			args[i] = NULL;
 		}
 		i++;
@@ -198,34 +193,36 @@ void	execution(t_data *data, char *args[])
 	data->pid = fork();
 	if (data->pid == 0)
 	{
-		if (input_redirect && input_file)
+		if (d_data.input_redirect && d_data.input_file)
 		{
-			fd = open(input_file, O_RDONLY);
-			if (fd < 0)
+			d_data.fd = open(d_data.input_file, O_RDONLY);
+			if (d_data.fd < 0)
 			{
 				perror("Error opening input file");
 				exit(EXIT_FAILURE);
 			}
-			dup2(fd, STDIN_FILENO);
-			close(fd);
+			dup2(d_data.fd, STDIN_FILENO);
+			close(d_data.fd);
 		}
-		if (output_redirect && output_file)
+		if (d_data.output_redirect && d_data.output_file)
 		{
-			if (append_mode)
+			if (d_data.append_mode)
 			{
-				fd = open(output_file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+				d_data.fd = open(d_data.output_file,
+						O_WRONLY | O_CREAT | O_APPEND, 0644);
 			}
 			else
 			{
-				fd = open(output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+				d_data.fd = open(d_data.output_file,
+						O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			}
-			if (fd < 0)
+			if (d_data.fd < 0)
 			{
 				perror("Error opening output file");
 				exit(EXIT_FAILURE);
 			}
-			dup2(fd, STDOUT_FILENO);
-			close(fd);
+			dup2(d_data.fd, STDOUT_FILENO);
+			close(d_data.fd);
 		}
 		if (execve(data->command_path, args, environ) == -1)
 		{

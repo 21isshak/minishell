@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:39:24 by iskaraag          #+#    #+#             */
-/*   Updated: 2024/12/22 15:52:03 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:58:24 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ typedef struct s_pipe_data
 	char	***commands;
 	int		i;
 }			t_pipe_data;
+
+typedef struct s_drct_data
+{
+	int		input_redirect;
+	int		output_redirect;
+	int		append_mode;
+	char	*input_file;
+	char	*output_file;
+	int		fd;
+}			t_drct_data;
 
 extern char	**environ;
 # define MAX_ARGS 1024
