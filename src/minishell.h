@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:39:24 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/05 19:58:24 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:48:57 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 typedef struct s_data
 {
@@ -66,6 +67,8 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strdup(const char *src);
+void		ft_putstr_fd(char *s, int fd);
+void		ft_putchar_fd(char c, int fd);
 
 // path_utils.c
 void		build_path(char *full_path, size_t size, const char *token,
@@ -84,6 +87,7 @@ void		handle_cd(char *args[]);
 void		handle_env(void);
 void		handle_unset(char *args[]);
 void		handle_export(char *args[]);
+void		handle_echo(char *args[]);
 void		handle_clear(void);
 
 // builtin_execution.c

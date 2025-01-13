@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:05 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/05 19:59:02 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:58:53 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,49 @@ void	handle_export(char *args[])
 			write(2, "export: invalid format\n", 23);
 		i++;
 	}
+}
+
+void	handle_echo(char *args[])
+{
+	int		i;
+	bool	newline;
+	bool	in_quotes;
+	char	quote_char;
+
+	i = 1;
+	newline = true;
+	if (args[i] && !ft_strncmp(args[i], "-n\0", 3))
+	{
+		newline = false;
+		i++;
+	}
+	while (args[i])
+	{
+		in_quotes = false;
+		quote_char = '\0';
+		while (*args[i])
+		{
+			if ((args[i][0] == '"' || args[i][0] == '\'') && !in_quotes)
+			{
+				in_quotes = true;
+				quote_char = args[i][0];
+				args[i]++;
+			}
+			if (in_quotes && *args[i] == quote_char)
+			{
+				in_quotes = false;
+				args[i]++;
+				break ;
+			}
+			write(1, args[i], 1);
+			args[i]++;
+		}
+		if (args[i + 1])
+			write(1, " ", 1);
+		i++;
+	}
+	if (newline)
+		write(1, "\n", 1);
 }
 
 void	handle_clear(void)

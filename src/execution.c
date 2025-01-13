@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:07 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/05 19:57:45 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/13 19:00:07 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	execute_piped_commands(char **args)
 void	execution(t_data *data, char *args[])
 {
 	t_drct_data	d_data;
+	int			builtin_status;
 	int			i;
 
 	d_data.input_redirect = 0;
@@ -134,6 +135,7 @@ void	execution(t_data *data, char *args[])
 	d_data.append_mode = 0;
 	d_data.input_file = NULL;
 	d_data.output_file = NULL;
+	builtin_status = 0;
 	i = 0;
 	while (args[i])
 	{
@@ -164,6 +166,9 @@ void	execution(t_data *data, char *args[])
 		printf("Invalid command\n");
 		return ;
 	}
+	builtin_status = execute_builtin(args);
+	if (builtin_status != 0)
+		return ;
 	if (contains_pipe(args))
 	{
 		execute_piped_commands(args);
@@ -241,7 +246,8 @@ void	execution(t_data *data, char *args[])
 	free(data->command_path);
 }
 
-/*void	execution(t_data *data, char *args[])
+/*
+void	execution(t_data *data, char *args[])
 {
 	int	builtin;
 
@@ -282,4 +288,5 @@ void	execution(t_data *data, char *args[])
 	else
 		waitpid(data->pid, &data->status, 0);
 	free(data->command_path);
-}*/
+}
+*/

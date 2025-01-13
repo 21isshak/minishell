@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:09 by iskaraag          #+#    #+#             */
-/*   Updated: 2024/12/17 16:43:40 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/13 19:00:16 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,15 @@ char	*ft_strdup(const char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (s)
+		write (fd, s, ft_strlen(s));
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
 }
