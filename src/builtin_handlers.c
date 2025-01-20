@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:41:05 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/13 18:58:53 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:12:29 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,13 @@ void	handle_export(char *args[])
 	}
 }
 
-void	handle_echo(char *args[])
+void	handle_echo(char *args[], int last_status)
 {
 	int		i;
 	bool	newline;
 	bool	in_quotes;
 	char	quote_char;
+	char	*env_value;
 
 	i = 1;
 	newline = true;
@@ -107,6 +108,26 @@ void	handle_echo(char *args[])
 		quote_char = '\0';
 		while (*args[i])
 		{
+			if (args[i][0] == '$')
+			{
+				if (!ft_strncmp(args[i], "$?", 2))
+				{
+					char status_str[12];
+					snprintf(status_str, 12, "%d", last_status);
+					write(1, status_str, ft_strlen(status_str));
+					write(1, "\n", 1);
+					return ;
+				}
+				else
+				{
+					env_value = getenv(&args[i][1]);
+					if (env_value)
+					{
+						printf ("%s\n", env_value);
+						return ;
+					}
+				}
+			}
 			if ((args[i][0] == '"' || args[i][0] == '\'') && !in_quotes)
 			{
 				in_quotes = true;

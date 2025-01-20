@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:40:53 by iskaraag          #+#    #+#             */
-/*   Updated: 2025/01/13 18:49:06 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:10:46 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	execute_builtin(char *args[])
 {
+	t_data	data;
+
 	if (args[0] == NULL)
 		return (1);
 	if (ft_strncmp(args[0], "cd\0", 2) == 0)
@@ -38,7 +40,7 @@ int	execute_builtin(char *args[])
 	}
 	if (ft_strncmp(args[0], "echo\0", 5) == 0)
 	{
-		handle_echo(args);
+		handle_echo(args, data.status);
 		return (6);
 	}
 	if (ft_strncmp(args[0], "clear\0", 6) == 0)
