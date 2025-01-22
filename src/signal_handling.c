@@ -6,7 +6,7 @@
 /*   By: iskaraag <iskaraag@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:40:56 by iskaraag          #+#    #+#             */
-/*   Updated: 2024/12/17 16:46:13 by iskaraag         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:37:50 by iskaraag         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,10 @@
 void	handle_signal(int the_signal)
 {
 	if (the_signal == SIGINT)
-		write(1, "\nminishell> ", 12);
+	{
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		write(2, "\n", 1);
+		rl_redisplay();
+	}
 }

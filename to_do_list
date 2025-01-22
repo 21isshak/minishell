@@ -1,21 +1,21 @@
-********1) exit kontrol************************************
+****************1) exit kontrol*****************************************
 
-********2) return value of process:************************
-   -> echo $?
-   -> expr $? + $?
+****************2) return value of process:*****************************
+	-> echo $?
+	-> expr $? + $?
    
-********3) ctrl-C kontrol:*********************************
-   -> bos bir komut ardindan ctrl-C yapinca yeni satirda Enter'a tilayinca sikintisiz olmasi lazim. Yani bufferi temizlemek lazim (bashi kontrol et).
-   -> cat veya grep gibi bloke edecek komuttu argumansiz yaziktan sonraki ctrl-C sikintisiz olmasi lazim (bashi kontrol et).
+****************3) ctrl-C kontrol:**************************************
+	-> bos bir komut ardindan ctrl-C yapinca yeni satirda Enter'a tilayinca sikintisiz olmasi lazim. Yani bufferi temizlemek lazim (bashi kontrol et).
+	-> cat veya grep gibi bloke edecek komuttu argumansiz yaziktan sonraki ctrl-C sikintisiz olmasi lazim (bashi kontrol et).
 	
-********4) double quotes("") kontrolu:*********************
-   -> echo cat a | cat > a   bu komutu dene hem bashete hem minide
-   -> echo "cat a | cat > a" bunu da dene
+****************4) double quotes("") kontrolu:**************************
+	-> echo cat a | cat > a   bu komutu dene hem bashete hem minide
+	-> echo "cat a | cat > a" bunu da dene
 	
-********5) single quotes('') kontrolu**********************
-	
-********6) pipes kontrolu**********************************
-	
-********7) redirections kontrolu ama cok karmasik**********
-	
-********8) env kontrolu ve enviroment variables kontrolu***
+****************5) single quotes('') kontrolu***************************
+
+****************6) pipes kontrolu***************************************
+
+****************7) redirections kontrolu ama cok karmasik***************
+
+****************8) env kontrolu ve enviroment variables kontrolu********
