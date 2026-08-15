@@ -1,0 +1,23 @@
+****************1) exit control****************************************
+
+****************2) return value of process:****************************
+	-> echo $?
+	-> expr $? + $?
+   
+****************3) ctrl-C control:*************************************
+	-> when pressed ctrl+c after a nonsense command, on a new line pressing Enter should work without problems. So buffer needs to be cleaned (check bash).
+	-> ctl+c after no argument used comands like cat or grep which cause blockage should work (checak the bash).
+	
+****************4) double quotes("") control:**************************
+	-> echo cat a | cat > a
+	-> echo "cat a | cat > a"
+	
+****************5) single quotes('') control***************************
+
+****************6) pipes control***************************************
+
+****************7) redirections control but very complex **************
+
+****************8) env control and enviroment variables control********
+
+**********************maybe there are more*****************************
